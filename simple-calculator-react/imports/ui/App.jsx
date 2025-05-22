@@ -1,10 +1,13 @@
 // imports/ui/App.jsx
 import React from 'react';
-import { Calculator } from './Calculator'; // Import the Calculator
+import { Calculator } from './Calculator';
+import { GraphingCalculator } from './GraphingCalculator'; // Import
 
 export const App = () => (
   <div>
-    <h1>Simple Calculator</h1>
+    <h1>Scientific Calculator</h1>
     <Calculator />
+    <hr />
+    <GraphingCalculator />
   </div>
 );
