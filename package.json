@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@babel/runtime": "^7.27.1",
+    "browserify-des": "^1.0.2",
+    "create-hash": "^1.2.0"
+  }
+}
