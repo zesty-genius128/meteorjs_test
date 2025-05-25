@@ -1,7 +1,7 @@
 // imports/ui/App.jsx
 import React from 'react';
 import { Calculator } from './Calculator';
-import { GraphingCalculator } from './GraphingCalculator'; // Import
+import { GraphingCalculator } from './GraphingCalculator';
 
 export const App = () => (
   <div>

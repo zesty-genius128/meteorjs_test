@@ -1,21 +1,18 @@
 // imports/ui/Calculator.jsx
 import React, { useState } from 'react';
-import { create, all } from 'mathjs'; // Import math.js
+import { create, all } from 'mathjs'; 
 
-const math = create(all); // Create a math.js instance
+const math = create(all); 
 
 export const Calculator = () => {
   const [displayValue, setDisplayValue] = useState('0');
-  const [isRadians, setIsRadians] = useState(true); // Mode for trig functions
+  const [isRadians, setIsRadians] = useState(true); 
 
   const handleInput = (value) => {
     if (displayValue === '0' && !'()'.includes(value) && !math.isFunction(value) && !isOperator(value)) {
-      // If display is '0' and input is not an operator or function start, replace '0'
       setDisplayValue(value);
     } else if (isOperator(value) && isOperator(displayValue.slice(-1))) {
-      // Optional: Replace last operator if another is pressed
-      // setDisplayValue(displayValue.slice(0, -1) + value);
-      setDisplayValue(displayValue + value); // Or just append
+      setDisplayValue(displayValue + value);
     }
     else {
       setDisplayValue(displayValue + value);
@@ -36,23 +33,7 @@ export const Calculator = () => {
 
   const calculateResult = () => {
     try {
-      // Ensure trig functions use the correct mode (radians/degrees)
-      // math.js functions like sin, cos, tan default to radians.
-      // For degrees, you'd need to convert: e.g., math.sin(math.unit(value, 'deg'))
-      // This example will use radians by default.
-      // For a complex expression, you might need to pre-process it if you want to support degree inputs easily.
-      // For simplicity, math.evaluate will use its defaults.
       let expression = displayValue;
-
-      // Replace π and e with their numerical values if math.js doesn't handle them directly in the string
-      // (math.js actually does handle 'pi' and 'e' constants)
-      // expression = expression.replace(/π/g, 'pi').replace(/e/g, 'e');
-
-
-      // A more robust way to handle degree/radian for individual functions
-      // would be to parse the expression and wrap trig functions.
-      // For now, let's assume math.js handles it or we work in radians.
-      // math.config({ number: 'BigNumber' }) can be used for higher precision if needed.
 
       const result = math.evaluate(expression);
       setDisplayValue(String(result));
@@ -62,7 +43,6 @@ export const Calculator = () => {
     }
   };
 
-  // Example: Add a function like sqrt()
   const inputFunction = (funcName) => {
     if (displayValue === '0') {
       setDisplayValue(funcName + '(');
@@ -73,11 +53,8 @@ export const Calculator = () => {
 
   const toggleMode = () => {
     setIsRadians(!isRadians);
-    // You might need to clear display or show a notification
   };
 
-
-  // --- UI (Needs significant expansion for scientific calculator) ---
   const buttonStyle = { /* ... your existing style ... */ width: '60px', margin:'3px' };
   const displayStyle = { /* ... your existing style ... */ width: 'auto', minWidth: '260px', maxWidth: 'calc(100% - 20px)'};
   const calculatorStyle = { /* ... your existing style ... */ width: 'auto', maxWidth: '450px'};
