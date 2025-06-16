@@ -22,27 +22,27 @@ export const GraphingCalculator = () => {
   });
   const [xMin, setXMin] = useState(-10);
   const [xMax, setXMax] = useState(10);
-  const [points, setPoints] = useState(100);
+  const [points, setPoints] = useState(100); // Number of points to plot
 
   const plotFunction = () => {
     try {
-      const compiledFunc = math.compile(funcStr);
+      const compiledFunc = math.compile(funcStr); // Compile the function string
       const xValues = [];
       const yValues = [];
       const step = (xMax - xMin) / (points - 1);
 
       for (let i = 0; i < points; i++) {
         const x = xMin + i * step;
-        xValues.push(x.toFixed(2));
+        xValues.push(x.toFixed(2)); // Use toFixed for cleaner labels
         try {
           const y = compiledFunc.evaluate({ x: x });
           if (typeof y === 'number' && isFinite(y)) {
              yValues.push(y);
           } else {
-             yValues.push(null);
+             yValues.push(null); // Handle undefined/infinite points (breaks line)
           }
         } catch (e) {
-          yValues.push(null);
+          yValues.push(null); // Error in evaluation for this x
         }
       }
 
@@ -62,6 +62,7 @@ export const GraphingCalculator = () => {
     }
   };
 
+  // Plot initially and when function or range changes
   useEffect(() => {
     plotFunction();
   }, [funcStr, xMin, xMax, points]);
